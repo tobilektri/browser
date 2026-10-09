@@ -49,7 +49,7 @@ export class HTMLCanvasElementLuminanceSource extends LuminanceSource {
 
   private buffer: Uint8ClampedArray;
 
-  private tempCanvasElement?: HTMLCanvasElement;
+  private tempCanvasElement?: HTMLCanvasElement | null = null;
 
   public constructor(private canvas: HTMLCanvasElement) {
     super(canvas.width, canvas.height);
@@ -118,7 +118,7 @@ export class HTMLCanvasElementLuminanceSource extends LuminanceSource {
   }
 
   private getTempCanvasElement() {
-    if (null === this.tempCanvasElement) {
+    if (!this.tempCanvasElement) {
       const tempCanvasElement = this.canvas.ownerDocument.createElement('canvas');
       tempCanvasElement.width = this.canvas.width;
       tempCanvasElement.height = this.canvas.height;
